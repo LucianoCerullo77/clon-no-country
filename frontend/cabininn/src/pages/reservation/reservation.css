@@ -1,0 +1,14 @@
+.datatime {
+   width: 100%;
+   padding: 5px 0 5px 0;
+}
+
+
+
+.input-group {
+    flex-wrap:nowrap !important;
+}
+
+.reservation {
+    margin-top: 180px;
+}
