@@ -14,8 +14,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import Swal from "sweetalert2";
 import "./reservation.css";
+import { AiOutlineSearch } from "react-icons/ai";
 
-const ReservationByOne = ({ idus }) => {
+const ReservationByOne = ({ setsearching, searching, search }) => {
   let { id } = useParams();
   const [hotels, sethotels] = useState([]);
 
@@ -25,12 +26,13 @@ const ReservationByOne = ({ idus }) => {
   const [cantni, setcantni] = useState(0);
 
   const [total, settotal] = useState(0);
-
+  
   useEffect(() => {
+    
     axios
       .get(`https://cabininn-backend-production.up.railway.app/hotels/${id}`)
       .then((res) => sethotels(res.data));
-    window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
   }, []);
 
   const probando = () => {
@@ -54,7 +56,7 @@ const ReservationByOne = ({ idus }) => {
       fechaf = "0".concat(fechaf);
     }
 
-    console.log(fechai, fechaf);
+    // console.log(fechai, fechaf);
 
     axios
       .post("https://cabininn-backend-production.up.railway.app/bookings/", {
@@ -112,24 +114,35 @@ const ReservationByOne = ({ idus }) => {
     settotal(Number(hotels?.dailyPrice) * cantDias);
   };
 
+  const data = (e) => {
+    e.preventDefault()
+    search()
+    window.location.assign(`../results/${searching}`);
+    
+  }
+
   return (
     <Container className="reservation">
-      <form action="" className="form-input d-sm-none">
-        <input
-          list="countries"
-          type="text"
-          // onChange={(e) => setsearching(e.target.value)}
-          // value={searching}
-          className="searchBox px-3 w-100 mx-3 "
-          placeholder=" Buscar"
-        />
-      </form>
+
+      
+      <form onSubmit={ data} className="form-input d-sm-none">
+      <AiOutlineSearch className="icon-s" />
+            <input
+              list="countries"
+              type="text"
+              onChange={(e) => setsearching(e.target.value)}
+              value={searching}
+              className="searchBox px-3 w-100 mx-3 ps-5"
+              placeholder="Buscar"
+            />
+          </form>
       <Row>
         <Carousel>
           <Carousel.Item>
             <img
               className="d-block w-100"
               src={hotels.urlImage}
+              
               alt="First slide"
             />
           </Carousel.Item>

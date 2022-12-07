@@ -9,10 +9,12 @@ import { MdGTranslate } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import "./results.css";
 import { Link } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
 
-const Results = ({ capture, hotels }) => {
+const Results = ({ capture, hotels, setsearching, searching, search}) => {
   let { country } = useParams();
 
+  
   const pintaCards = () => {
     if (capture === undefined) {
       const hotelbyCountry = hotels.filter(
@@ -21,16 +23,25 @@ const Results = ({ capture, hotels }) => {
 
       console.log(hotelbyCountry);
 
+      const data = (e) => {
+        e.preventDefault()
+        search()
+        window.location.assign(`./${searching}`);
+        
+      }
+
+
       return (
         <Container>
-          <form action="" className="form-input d-sm-none">
+          <form onSubmit={ data} className="form-input d-sm-none">
+          <AiOutlineSearch className="icon-s" />
             <input
               list="countries"
               type="text"
-              // onChange={(e) => setsearching(e.target.value)}
-              // value={searching}
-              className="searchBox px-3 w-100 mx-3 "
-              placeholder=" Buscar"
+              onChange={(e) => setsearching(e.target.value)}
+              value={searching}
+              className="searchBox px-3 w-100 mx-3 ps-5 "
+              placeholder="Busca acá tu alojamiento ideal"
             />
           </form>
           <h2 className="mainTitleResult text-center ">
@@ -43,7 +54,7 @@ const Results = ({ capture, hotels }) => {
               gusté!{" "}
             </h2>
             <>
-            <Row xs={1} sm={2} md={2} lg={3} className="g-3 mt-2">
+              <Row xs={1} sm={2} md={2} lg={3} className="g-3 mt-2">
                 {hotelbyCountry.map((item) => (
                   <Col key={item.id} className="my-4 mb-5">
                     <Link
@@ -116,6 +127,16 @@ const Results = ({ capture, hotels }) => {
     } else {
       return (
         <Container>
+          <form action="" className="form-input d-sm-none">
+            <input
+              list="countries"
+              type="text"
+              // onChange={(e) => setsearching(e.target.value)}
+              // value={searching}
+              className="searchBox px-3 w-100 mx-3 "
+              placeholder=" Buscar"
+            />
+          </form>
           <h2 className="mainTitleResult text-center ">
             Resultados para {country}
           </h2>
