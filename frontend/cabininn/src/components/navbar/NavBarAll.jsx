@@ -42,7 +42,7 @@ const NavBarAll = ({
             type="text"
             onChange={(e) => setsearching(e.target.value)}
             value={searching}
-            className="searchBox px-3"
+            className="searchBox px-3 d-none d-sm-block"
             placeholder=" Buscar"
           />
 
@@ -67,7 +67,7 @@ const NavBarAll = ({
               <p className="user ms-4">
                 Bienvenido, {usuario?.email.split("@")[0]}
               </p>
-              <li>
+              {/* <li>
                 <Link
                   className="btn-search fs-5 mx-5"
                   to={`/user`}
@@ -75,7 +75,7 @@ const NavBarAll = ({
                 >
                   Ajustes
                 </Link>
-              </li>
+              </li> */}
               {/* <li>
                 <Link
                   className="btn-search fs-2"
