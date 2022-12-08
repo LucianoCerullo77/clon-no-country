@@ -12,7 +12,7 @@ function SectionImg1() {
       <h4 className="subTitles mb-5 mb-2">Proba nuestros destinos aleatorios y dejate sorprender</h4>
     </Container>
     <div className="mb-3">
-      <Link to = {`./reservation/${Math.floor(Math.random()*14)}`}>
+      <Link to = {`./reservation/${Math.floor(Math.random()+1*14)}`}>
       <img className="w-100 img-fluid mb-5" src={img} alt="" />
       </Link>
     </div>
